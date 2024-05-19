@@ -2,3 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+input[type='email'],
+input[type='password']{
+    @apply border h-10 w-80 rounded-lg outline-0 p-4 bg-gray-100
+}

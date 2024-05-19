@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Icons from "./Icons"
 
 export default function Hero() {
     return (
@@ -9,9 +10,10 @@ export default function Hero() {
                     I've got a recipe for happiness, and it
                     starts with you.
                 </p>
-                <button className="outline-0 bg-primary text-white font-semibold rounded-full px-4 py-2 border hover:border hover:bg-white hover:text-primary">ORDER NOW!</button>
-                <button className="outline-0 ml-5 bg-white text-gray-600 font-semibold rounded-full px-4 py-2 border hover:border hover:bg-primary hover:text-white">Learn More</button>
-            </div>
+                <div className="flex flex-row">
+                <button className="outline-0 bg-primary text-white font-semibold rounded-lg px-4 py-2 border flex">ORDER NOW!<Icons/></button>
+                <button className="outline-0 ml-5 bg-white text-gray-600 font-semibold rounded-lg px-4 py-2 border flex">Learn More<Icons/></button>
+            </div></div>
             <div className="relative">
                 <Image src={'/hero-img1.png'} layout={'fill'}
                     objectFit={'contain'} alt={'biriyani'} />

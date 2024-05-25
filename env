@@ -8,5 +8,7 @@
 #YTXiSj10tujc2Hth
 
 MONGO_URL="mongodb+srv://worldhidden0:YTXiSj10tujc2Hth@biriyani.dkpyyzg.mongodb.net/biriyani_users"
+NEXTAUTH_URL=http://localhost:3000/
+SECRET='nkdnsfnkfnfkdsnfksdfnk'
 
 

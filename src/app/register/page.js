@@ -1,7 +1,5 @@
 "use client";
 import Heading from "../compoents/layout/Heading"
-import Footer from "../compoents/layout/Footer"
-import Header from "../compoents/layout/Header"
 import Image from "next/image"
 import { useState } from "react"
 import Link from "next/link";
@@ -73,9 +71,9 @@ export default function Registration() {
                     <Image src={'/google.png'} alt={''} width={24} height={24} />  Login with Google
                 </button>
                 <div className="text-black text-center text-sm">
-                        Existing account?{'  '}
-                        < Link href="/login" className="underline cursor-pointer">login here</Link>
-                    </div>
+                    Existing account?{'  '}
+                    < Link href="/login" className="underline cursor-pointer">login here</Link>
+                </div>
             </form>
         </>
     )

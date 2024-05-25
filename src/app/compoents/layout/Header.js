@@ -10,7 +10,7 @@ return(
       <Link href={""}>About</Link>
       <Link href={""}>Contact</Link>
       <Link href={'/register'} className="ml-10 text-gray-700">Register</Link>
-      <Link href={""} className="bg-primary text-white rounded-lg px-4 py-2 border">Login</Link>
+      <Link href={"/login"} className="bg-primary text-white rounded-lg px-4 py-2 border">Login</Link>
     </nav>
     </header>
     </>

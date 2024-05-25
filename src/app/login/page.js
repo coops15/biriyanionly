@@ -1,12 +1,9 @@
-"use client";
+'use client';
 import Heading from "../compoents/layout/Heading"
-import Footer from "../compoents/layout/Footer"
-import Header from "../compoents/layout/Header"
-import Image from "next/image"
 import { useState } from "react"
 import Link from "next/link";
 
-export default function Registration() {
+export default function Loginpage(){
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -40,12 +37,11 @@ export default function Registration() {
 
     }
 
-    return (
+    return(
         <>
-            <Heading
-                heading={'Register'} />
-
-            <form className="flex flex-col gap-4 relative items-center">
+        <Heading
+                heading={'Login'} />
+                <form className="flex flex-col gap-4 relative items-center">
                 {usercreated &&
                     <div className="flex flex-col m-0 text-black text-center text-sm">
                         user created Sucsessfully.
@@ -66,15 +62,15 @@ export default function Registration() {
                 <input type="email" placeholder="email" disabled={userdisplay} value={email} onChange={e => setEmail(e.target.value)} />
                 <input type="password" placeholder="password" disabled={userdisplay} value={password} onChange={e => setPassword(e.target.value)} />
                 <button onClick={handleSubmit} type="submit" className="outline-0 bg-primary text-white font-semibold uppercase py-2 px-4 rounded-lg w-80">Register</button>
-                <div className="text-gray-700 font-semibold text-sm">
+                {/* <div className="text-gray-700 font-semibold text-sm">
                     or login with provider
                 </div>
                 <button onClick={console.log('fkk')} className="outline-0  text-black text-sm border-2 font-semibold py-2 px-4 rounded-lg w-80 flex flex-row justify-center items-center gap-4">
                     <Image src={'/google.png'} alt={''} width={24} height={24} />  Login with Google
-                </button>
+                </button> */}
                 <div className="text-black text-center text-sm">
-                        Existing account?{'  '}
-                        < Link href="/login" className="underline cursor-pointer">login here</Link>
+                        I don't have an account.{'  '}
+                        < Link href="/login" className="underline cursor-pointer">Register here</Link>
                     </div>
             </form>
         </>

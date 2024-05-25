@@ -1,5 +1,8 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import Header from "./compoents/layout/Header";
+import Footer from "./compoents/layout/Footer";
+
 
 const inter = Poppins({ subsets: ["latin"] ,weight:[ '100','200','300','400','500','600','700','800', '900']});
 
@@ -13,7 +16,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <main className="max-w-6xl mx-auto p-4">
+          <Header/>
         {children}
+        <Footer/>
         </main>
         </body>
     </html>

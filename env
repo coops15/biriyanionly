@@ -1,14 +1,10 @@
-#Biriyani-Only
-#UzFrPhOCdBPFsC0h
-
-#Biriyani-Only
-#nDIfkOiTo8UCzeGq
-
-#worldhidden0
-#YTXiSj10tujc2Hth
 
 MONGO_URL="mongodb+srv://worldhidden0:YTXiSj10tujc2Hth@biriyani.dkpyyzg.mongodb.net/biriyani_users"
-NEXTAUTH_URL=http://localhost:3000/
+
+NEXTAUTH_URL='http://localhost:3000/'
 SECRET='nkdnsfnkfnfkdsnfksdfnk'
+
+GOOGLE_CLIENT_ID='349021949821-d0ls706l8sjdm1kpq3drjqaqb2uk32ep.apps.googleusercontent.com'
+GOOGLE_CLIENT_SECRET='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'
 
 

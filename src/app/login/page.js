@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
 
+
 export default function Loginpage(){
 
     const [email, setEmail] = useState('')
@@ -21,22 +22,8 @@ export default function Loginpage(){
         setUserCreated(false)
         setUserDisplay(true)
 
-        await signIn('credentials',{email,password});
-        // const response = await fetch('/api/login', {
-        //     method: 'POST',
-        //     body: JSON.stringify({ email, password }),
-        //     headers: { 'Content-Type': 'application/json' }
-        // })
-        // if (response.ok) {
-        //     setUserCreated(true)
-        //     setError(false)
-        //     setUserCreating(false)
-        // } else {
-        //     setError(true)
-        //     setUserCreated(false)
-        //     setUserCreating(false)
-        //     setUserDisplay(false)
-        // }
+        await signIn('credentials',{email,password,callbackUrl:'/'});
+        
         setUserCreating(false)
 
     }
@@ -45,7 +32,7 @@ export default function Loginpage(){
         <>
         <Heading
                 heading={'Login'} />
-                <form className="flex flex-col gap-4 relative items-center" onSubmit={handleSubmit} method="POST" action={'/api/auth'}>
+                <form className="flex flex-col gap-4 relative items-center" onSubmit={handleSubmit}>
                 {usercreated &&
                     <div className="flex flex-col m-0 text-black text-center text-sm">
                         user created Sucsessfully.
@@ -69,7 +56,7 @@ export default function Loginpage(){
                 <div className="text-gray-700 font-semibold text-sm">
                     or login with provider
                 </div>
-                <button className="outline-0  text-black text-sm border-2 font-semibold py-2 px-4 rounded-lg w-80 flex flex-row justify-center items-center gap-4">
+                <button onClick={()=>signIn('google',{callbackUrl:'/'})} type="button" className="outline-0  text-black text-sm border-2 font-semibold py-2 px-4 rounded-lg w-80 flex flex-row justify-center items-center gap-4">
                     <Image src={'/google.png'} alt={''} width={24} height={24} />  Login with Google
                 </button>
                 <div className="text-black text-center text-sm">

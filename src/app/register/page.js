@@ -3,6 +3,7 @@ import Heading from "../compoents/layout/Heading"
 import Image from "next/image"
 import { useState } from "react"
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 
 export default function Registration() {
 
@@ -43,7 +44,7 @@ export default function Registration() {
             <Heading
                 heading={'Register'} />
 
-            <form className="flex flex-col gap-4 relative items-center">
+            <form className="flex flex-col gap-4 relative items-center" onSubmit={handleSubmit}>
                 {usercreated &&
                     <div className="flex flex-col m-0 text-black text-center text-sm">
                         user created Sucsessfully.
@@ -63,11 +64,11 @@ export default function Registration() {
                 }
                 <input type="email" placeholder="email" disabled={userdisplay} value={email} onChange={e => setEmail(e.target.value)} />
                 <input type="password" placeholder="password" disabled={userdisplay} value={password} onChange={e => setPassword(e.target.value)} />
-                <button onClick={handleSubmit} type="submit" className="outline-0 bg-primary text-white font-semibold uppercase py-2 px-4 rounded-lg w-80">Register</button>
+                <button type="submit" className="outline-0 bg-primary text-white font-semibold uppercase py-2 px-4 rounded-lg w-80">Register</button>
                 <div className="text-gray-700 font-semibold text-sm">
                     or login with provider
                 </div>
-                <button onClick={console.log('fkk')} className="outline-0  text-black text-sm border-2 font-semibold py-2 px-4 rounded-lg w-80 flex flex-row justify-center items-center gap-4">
+                <button onClick={()=>signIn('google',{callbackUrl:'/'})} type='button' className="outline-0  text-black text-sm border-2 font-semibold py-2 px-4 rounded-lg w-80 flex flex-row justify-center items-center gap-4">
                     <Image src={'/google.png'} alt={''} width={24} height={24} />  Login with Google
                 </button>
                 <div className="text-black text-center text-sm">

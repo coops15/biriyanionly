@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/mongodb-adapter": "^3.1.0",
     "bcryptjs": "^2.4.3",
     "lorem-ipsum": "^2.0.8",
     "mongodb": "^6.6.2",

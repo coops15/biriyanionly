@@ -13,7 +13,10 @@ const handler = NextAuth({
   secret:'nkdnsfnkfnfkdsnfksdfnk',
   adapter: MongoDBAdapter(clientPromise),
   providers: [
-    
+    GoogleProvider({
+      clientId: '349021949821-d0ls706l8sjdm1kpq3drjqaqb2uk32ep.apps.googleusercontent.com',
+      clientSecret: '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'
+    }),
     CredentialsProvider({
       name: 'Credentials',
       id: 'credentials',

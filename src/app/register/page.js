@@ -44,11 +44,11 @@ export default function Registration() {
             <Heading
                 heading={'Register'} />
 
-            <form className="flex flex-col gap-4 relative items-center" onSubmit={handleSubmit}>
+            <form className="flex flex-col gap-2 relative items-center" onSubmit={handleSubmit}>
                 {usercreated &&
                     <div className="flex flex-col m-0 text-black text-center text-sm">
                         user created Sucsessfully.
-                        < Link className="underline cursor-pointer">login{'>>'}</Link>
+                        < Link href="/login" className="underline cursor-pointer">login{'>>'}</Link>
                     </div>
                 }
                 {error &&

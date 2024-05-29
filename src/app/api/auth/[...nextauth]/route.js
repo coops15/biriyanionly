@@ -25,12 +25,14 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials, req) {
+        console.log('enna katha');
         const { email, password } = credentials;
-        mongoose.connect('mongodb+srv://worldhidden0:YTXiSj10tujc2Hth@biriyani.dkpyyzg.mongodb.net/biriyani_users')
+        await mongoose.connect('mongodb+srv://worldhidden0:YTXiSj10tujc2Hth@biriyani.dkpyyzg.mongodb.net/biriyani_users')
         const user = await User.findOne({ email })
         const passwordOk = user && bcrypt.compare(password, user.password)
         console.log({ password })
         if (passwordOk) {
+          console.log({email , password});
           return user;
         }
 
@@ -40,5 +42,6 @@ const handler = NextAuth({
     })
   ]
 })
+
 
 export { handler as GET, handler as POST }

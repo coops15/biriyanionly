@@ -6,7 +6,7 @@ import Image from "next/image";
 import { signIn } from "next-auth/react";
 
 
-export default function Loginpage(){
+export default function Loginpage() {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -22,21 +22,21 @@ export default function Loginpage(){
         setUserCreated(false)
         setUserDisplay(true)
 
-        await signIn('credentials',{email,password,callbackUrl:'/'});
-        
+        await signIn('credentials', { email, password });
+
+
         setUserCreating(false)
 
     }
 
-    return(
+    return (
         <>
-        <Heading
-                heading={'Login'} />
-                <form className="flex flex-col gap-4 relative items-center" onSubmit={handleSubmit}>
+            <Heading heading={'Login'} />
+            <form className="flex flex-col gap-2 relative items-center" onSubmit={handleSubmit}>
                 {usercreated &&
                     <div className="flex flex-col m-0 text-black text-center text-sm">
                         user created Sucsessfully.
-                        < Link className="underline cursor-pointer">login{'>>'}</Link>
+                        < Link href={''} className="underline cursor-pointer">login{'>>'}</Link>
                     </div>
                 }
                 {error &&
@@ -56,13 +56,13 @@ export default function Loginpage(){
                 <div className="text-gray-700 font-semibold text-sm">
                     or login with provider
                 </div>
-                <button onClick={()=>signIn('google',{callbackUrl:'/'})} type="button" className="outline-0  text-black text-sm border-2 font-semibold py-2 px-4 rounded-lg w-80 flex flex-row justify-center items-center gap-4">
+                <button onClick={() => signIn('google', { callbackUrl: '/' })} type="button" className="outline-0  text-black text-sm border-2 font-semibold py-2 px-4 rounded-lg w-80 flex flex-row justify-center items-center gap-4">
                     <Image src={'/google.png'} alt={''} width={24} height={24} />  Login with Google
                 </button>
                 <div className="text-black text-center text-sm">
-                        I don't have an account.{'  '}
-                        < Link href="/register" className="underline cursor-pointer">Register here</Link>
-                    </div>
+                    I don't have an account.{'  '}
+                    < Link href="/register" className="underline cursor-pointer">Register here</Link>
+                </div>
             </form>
         </>
     )

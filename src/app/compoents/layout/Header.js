@@ -3,11 +3,11 @@ import { constants } from "buffer";
 import { signOut, useSession } from "next-auth/react"
 import Link from "next/link"
 
+
 export default function Header(){
-  const session=useSession()
-  console.log(session);
-  const status=session.status;
-  console.log(status);
+  const { data: session, status } = useSession();
+
+  console.log({ data: session, status });
 return(
     <>
     <header className="flex flex-row items-center justify-between">

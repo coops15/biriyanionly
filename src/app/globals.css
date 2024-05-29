@@ -3,11 +3,12 @@
 @tailwind utilities;
 
 input[type='email'],
-input[type='password']{
-    @apply border h-10 w-80 rounded-lg outline-0 p-4 bg-gray-100
+input[type='password'],
+input[type='text']{
+    @apply border h-10 w-80 rounded-lg outline-0 m-1 p-4 bg-gray-100
 }
 
 input[type='email']:disabled,
 input[type='password']:disabled{
-    @apply border h-10 w-80 rounded-lg outline-1 p-4 bg-gray-300
+    @apply border h-10 w-80 rounded-lg m-1 outline-1 p-4 bg-gray-300
 }

@@ -7,7 +7,7 @@ import clientPromise from "../../../compoents/libs/MongoConnect";
 import { User } from "../../../../models/User";
 import bcrypt from 'bcryptjs';
 
-const handler = NextAuth({
+export const authOptions={
   secret: 'nkdnsfnkfnfkdsnfksdfnk',
   adapter: MongoDBAdapter(clientPromise),
   providers: [
@@ -27,7 +27,7 @@ const handler = NextAuth({
         const { email, password } = credentials;
 
         try {
-          await mongoose.connect('mongodb+srv://worldhidden0:YTXiSj10tujc2Hth@biriyani.dkpyyzg.mongodb.net/biriyani_users?retryWrites=true&w=majority&appName=Biriyani');
+          await mongoose.connect(process.env.MONGO_URL);
           console.log('Database connected successfully');
 
           const user = await User.findOne({ email });
@@ -52,10 +52,10 @@ const handler = NextAuth({
       }
     })
   ],
-  pages: {
-    signIn: '/login',
-    error: '/login' // Redirect to the login page on error
-  },
+  // pages: {
+  //   signIn: '/login',
+  //   error: '/login' // Redirect to the login page on error
+  // },
   session: {
     strategy: 'jwt',
   },
@@ -74,6 +74,8 @@ const handler = NextAuth({
     }
   },
   debug: true // Enable debug mode
-});
+}
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

@@ -8,6 +8,11 @@ input[type='text']{
     @apply border h-10 w-80 rounded-lg outline-0 m-1 p-4 bg-gray-100
 }
 
+input[type='country'],
+input[type='postelcode']{
+    @apply border h-10 w-36 rounded-lg outline-0 m-1 p-4 bg-gray-100
+}
+
 input[type='email']:disabled,
 input[type='password']:disabled{
     @apply border h-10 w-80 rounded-lg m-1 outline-1 p-4 bg-gray-300

@@ -1,4 +1,5 @@
 import { model, models, Schema } from "mongoose";
+import bcrypt from 'bcryptjs';
 
 const UserSchema = new Schema({
     email: {
@@ -9,13 +10,32 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true,
-        validate: pass => {
-            if (!pass.length || pass.length < 5) {
-                new Error("password must be atleast 5 characters");
-                return false;
-            }
+        validate: {
+            validator: pass => pass.length >= 5,
+            message: "Password must be at least 5 characters long"
         }
     }
 }, { timestamps: true });
 
+// Hash the password before saving the user document
+UserSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) {
+        return next();
+    }
+    
+    try {
+        const salt = await bcrypt.genSalt(10);
+        this.password = await bcrypt.hash(this.password, salt);
+        next();
+    } catch (error) {
+        next(error);
+    }
+});
+
+// Compare entered password with hashed password stored in the database
+UserSchema.methods.comparePassword = async function (candidatePassword) {
+    return await bcrypt.compare(candidatePassword, this.password);
+};
+
+// Ensure the model is not recreated every time the file is imported
 export const User = models?.User || model('User', UserSchema);

@@ -5,7 +5,7 @@ import { MongoClient, ServerApiVersion } from "mongodb"
 //   throw new Error('Invalid/Missing environment variable: "MONGODB_URI"')
 // }
  
-const uri = 'mongodb+srv://worldhidden0:YTXiSj10tujc2Hth@biriyani.dkpyyzg.mongodb.net/biriyani_users'
+const uri = 'mongodb+srv://worldhidden0:YTXiSj10tujc2Hth@biriyani.dkpyyzg.mongodb.net/biriyani_users?retryWrites=true&w=majority&appName=Biriyani '
 const options = {
   serverApi: {
     version: ServerApiVersion.v1,

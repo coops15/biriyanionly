@@ -17,7 +17,7 @@ export default function Header() {
           <Link href="/contact">Contact</Link>
           {status === 'authenticated' && (
             <>
-              <span className="ml-10 text-gray-700">Hello, <Link href="/profile">{session.user.email}</Link></span>
+              <span className="ml-10 text-gray-700">Hello, <Link href="/profile">{session?.user?.name || 'user'}</Link></span>
               <button onClick={() => signOut('/')} className="outline-0 bg-primary text-white rounded-lg px-4 py-2 border">Logout</button>
             </>
           )}

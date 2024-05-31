@@ -19,5 +19,17 @@ export async function PUT(req) {
         // console.log(user.name);
         // console.log(session)
     }
+    if ('address' in data) {
+        const response=await User.updateOne({ email }, { address: data.address })
+   }
+   if ('country' in data) {
+    const response=await User.updateOne({ email }, { country: data.country })
+}
+if ('postelcode' in data) {
+    const response=await User.updateOne({ email }, { postelcode: data.postelcode })
+}
+if ('phone' in data) {
+    const response=await User.updateOne({ email }, { phone: data.phone })
+}
     return Response.json(true)
 }

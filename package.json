@@ -11,8 +11,10 @@
   "dependencies": {
     "@auth/mongodb-adapter": "^3.1.0",
     "bcryptjs": "^2.4.3",
+    "firebase": "^10.12.2",
+    "formidable-serverless": "^1.1.1",
     "lorem-ipsum": "^2.0.8",
-    "mongodb": "^6.6.2",
+    "mongodb": "^6.7.0",
     "mongoose": "^8.4.0",
     "next": "^14.2.3",
     "next-auth": "^4.24.7",

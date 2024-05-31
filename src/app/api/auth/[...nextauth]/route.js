@@ -7,7 +7,7 @@ import clientPromise from "../../../compoents/libs/MongoConnect";
 import { User } from "../../../../models/User";
 import bcrypt from 'bcryptjs';
 
-export const authOptions={
+export const authOptions = {
   secret: 'nkdnsfnkfnfkdsnfksdfnk',
   adapter: MongoDBAdapter(clientPromise),
   providers: [
@@ -43,7 +43,18 @@ export const authOptions={
           }
 
           console.log('User authenticated:', email);
-          return { id: user._id, email: user.email }; // Return a minimal user object
+          // Add more user details here if needed
+          return { 
+            id: user._id, 
+            email: user.email,
+            name: user.name,
+            address:user.address,
+            country:user.country,
+postelcode:user.postelcode,
+phone:user.phone,
+image:user.image,
+            role: user.role
+          }; 
 
         } catch (error) {
           console.error('Error in authorize function:', error);
@@ -64,12 +75,32 @@ export const authOptions={
       if (user) {
         token.id = user.id;
         token.email = user.email;
+        token.name = user.name;
+        token.address=user.address;
+        token.country=user.country;
+        token.postelcode=user.postelcode;
+        token.phone=user.phone;
+        token.image=user.image;
+        token.role = user.role; // Add more fields here
       }
       return token;
     },
     async session({ session, token }) {
-      session.user.id = token.id;
-      session.user.email = token.email;
+      await mongoose.connect(process.env.MONGO_URL); // Ensure the database connection is established
+      const user = await User.findById(token.id); // Fetch the latest user details from the database
+      
+      if (user) {
+        session.user.id = user._id;
+        session.user.email = user.email;
+        session.user.name = user.name;
+        session.user.address = user.address;
+        session.user.country = user.country;
+        session.user.postelcode = user.postelcode;
+        session.user.phone = user.phone;
+        session.user.image = user.image;
+        session.user.role = user.role; // Add more fields here
+      }
+      
       return session;
     }
   },

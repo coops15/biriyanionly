@@ -4,6 +4,11 @@ import { type } from "os";
 
 const UserSchema = new Schema({
     name:{type:String},
+    address:{type:String},
+    country:{type:String},
+    postelcode:{type:Number},
+    phone:{type:Number},
+    image:{type:String},
     email: {
         type: String,
         required: true,

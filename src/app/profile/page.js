@@ -15,6 +15,7 @@ export default function ProfilePage() {
     const [phone, setPhone] = useState('')
     const [image,setImage]=useState('')
     const [success, setSuccsess] = useState(false)
+    const [saving,setSaving]=useState('')
 
     useEffect(() => {
         if (status === 'authenticated') {
@@ -36,35 +37,55 @@ export default function ProfilePage() {
 
     async function handleSubmit(e) {
         e.preventDefault()
+        setSaving('Processing....')
+        setSuccsess(true)
         const response = await fetch('api/profile', {
             method: 'PUT',
             headers: { 'Contant-Type': 'application/json' },
             body: JSON.stringify({ name: username, address: address, country: country, postelcode: postelcode, phone: phone })
         })
         if (response.ok) {
-            setSuccsess(true)
+            setSaving('Saved successful!')
+            setTimeout(() => setSuccsess(false), 3000)
+        }else{
+            setSaving('Faild to save!')
             setTimeout(() => setSuccsess(false), 3000)
         }
     }
 
     async function handleFileChange(e) {
         e.preventDefault()
+        setSaving('Processing....')
+        setSuccsess(true)
         const files = e.target.files;
         if (files?.length === 1) {
             const data = new FormData;
             data.set('file', files[0]);
-            await fetch('api/upload', {
+            const res = await fetch('api/upload', {
                 method: 'POST',
                 body: data,
                 // headers: { 'Content-Type': 'multipart/form-data' }
             })
+            if (res.ok) {
+                setSaving('Saved successful!')
+                setTimeout(() => setSuccsess(false), 3000)
+            }else{
+                setSaving('Faild to save!')
+                setTimeout(() => setSuccsess(false), 3000)
+            }
         }
     }
 
     return (
         <>
             <Heading heading={'Profile'} />
-            <form className="max-w-md mx-auto border" onSubmit={handleSubmit}>
+            <form className="relative max-w-md mx-auto border" onSubmit={handleSubmit}>
+                {success && (
+                    <div className="flex flex-col items-center justify-center w-100">
+                    <div className="mt-4 text-center w-80 bg-lime-400 p-3 rounded-lg text-white">
+                        {saving}
+                    </div>
+                    </div>)}
                 <div className="flex gap-2 p-4">
                     <div className="items-center flex flex-col mt-4">
                         <div className="bg-gray-100 p-1 justify-center items-center flex rounded-lg">
@@ -105,10 +126,7 @@ export default function ProfilePage() {
                         <button type="submit" className="outline-0 bg-primary text-white font-semibold uppercase py-2 px-4 rounded-lg w-80">save</button>
                     </div>
                 </div>
-                {success && (
-                    <div className="mt-4 text-center text-green-600 font-semibold">
-                        Save successful!
-                    </div>)}
+                
             </form>
         </>
     )

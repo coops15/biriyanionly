@@ -17,3 +17,11 @@ input[type='email']:disabled,
 input[type='password']:disabled{
     @apply border h-10 w-80 rounded-lg outline-1 p-4 bg-gray-300
 }
+
+/*active buttons meenu taps*/
+div .true{
+    @apply bg-primary text-white font-semibold py-2 px-4 rounded-full border cursor-pointer
+}
+div .false{
+    @apply font-semibold py-2 px-4 rounded-full text-gray-700 border cursor-pointer
+}

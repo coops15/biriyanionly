@@ -4,6 +4,8 @@ import Heading from "../compoents/layout/Heading";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import MenuTap from "../compoents/layout/MenuTap";
+import Link from "next/link";
 
 export default function ProfilePage() {
     const { data: session, status } = useSession();
@@ -13,9 +15,9 @@ export default function ProfilePage() {
     const [country, setCountry] = useState('')
     const [postelcode, setPostelCode] = useState('')
     const [phone, setPhone] = useState('')
-    const [image,setImage]=useState('')
+    const [image, setImage] = useState('')
     const [success, setSuccsess] = useState(false)
-    const [saving,setSaving]=useState('')
+    const [saving, setSaving] = useState('')
 
     useEffect(() => {
         if (status === 'authenticated') {
@@ -47,7 +49,7 @@ export default function ProfilePage() {
         if (response.ok) {
             setSaving('Saved successful!')
             setTimeout(() => setSuccsess(false), 3000)
-        }else{
+        } else {
             setSaving('Faild to save!')
             setTimeout(() => setSuccsess(false), 3000)
         }
@@ -69,7 +71,7 @@ export default function ProfilePage() {
             if (res.ok) {
                 setSaving('Saved successful!')
                 setTimeout(() => setSuccsess(false), 3000)
-            }else{
+            } else {
                 setSaving('Faild to save!')
                 setTimeout(() => setSuccsess(false), 3000)
             }
@@ -78,13 +80,18 @@ export default function ProfilePage() {
 
     return (
         <>
-            <Heading heading={'Profile'} />
+            <div className="p-3 flex flex-row gap-2 items-center justify-center">
+                <Link href='/profile'><MenuTap tittle={'Profile'} active={'true'} /></Link>
+                <Link href='/menuitems'><MenuTap tittle={'Menu Items'} active={'false'}/></Link>
+                <Link href='/users'><MenuTap tittle={'Users'} active={'false'}/></Link>
+            </div>
             <form className="relative max-w-md mx-auto border" onSubmit={handleSubmit}>
+
                 {success && (
                     <div className="flex flex-col items-center justify-center w-100">
-                    <div className="mt-4 text-center w-80 bg-lime-400 p-3 rounded-lg text-white">
-                        {saving}
-                    </div>
+                        <div className="mt-4 text-center  bg-lime-400 p-3 rounded-lg text-white font-semibold">
+                            {saving}
+                        </div>
                     </div>)}
                 <div className="flex gap-2 p-4">
                     <div className="items-center flex flex-col mt-4">
@@ -126,7 +133,7 @@ export default function ProfilePage() {
                         <button type="submit" className="outline-0 bg-primary text-white font-semibold uppercase py-2 px-4 rounded-lg w-80">save</button>
                     </div>
                 </div>
-                
+
             </form>
         </>
     )

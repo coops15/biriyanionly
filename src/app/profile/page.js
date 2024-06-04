@@ -10,12 +10,14 @@ import Link from "next/link";
 export default function ProfilePage() {
     const { data: session, status } = useSession();
     console.log({ data: session, status });
+
     const [username, setUserName] = useState('')
     const [address, setAddress] = useState('')
     const [country, setCountry] = useState('')
     const [postelcode, setPostelCode] = useState('')
     const [phone, setPhone] = useState('')
     const [image, setImage] = useState('')
+    const [admin, setAdmin] = useState(false)
     const [success, setSuccsess] = useState(false)
     const [saving, setSaving] = useState('')
 
@@ -27,6 +29,7 @@ export default function ProfilePage() {
             setPostelCode(session.user.postelcode)
             setPhone(session.user.phone)
             setImage(session.user.image)
+            setAdmin(session.user.admin)
         }
     }, [session, status]);
 
@@ -82,8 +85,12 @@ export default function ProfilePage() {
         <>
             <div className="p-3 flex flex-row gap-2 items-center justify-center">
                 <Link href='/profile'><MenuTap tittle={'Profile'} active={'true'} /></Link>
+                {admin && 
+                <>
                 <Link href='/menuitems'><MenuTap tittle={'Menu Items'} active={'false'}/></Link>
                 <Link href='/users'><MenuTap tittle={'Users'} active={'false'}/></Link>
+                </>
+                }
             </div>
             <form className="relative max-w-md mx-auto border" onSubmit={handleSubmit}>
 

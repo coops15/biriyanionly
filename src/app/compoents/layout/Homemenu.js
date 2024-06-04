@@ -1,9 +1,26 @@
+'use client';
 import Image from "next/image"
 import Menuitem from "./Menuitem"
 import Heading from "./Heading"
+import { useEffect, useState } from "react"
 
 
 export default function Homemenu() {
+
+    const [items,setItems]=useState([])
+
+    useEffect(() => {
+        async function menuitems() {
+            const response = await fetch('api/menuitems', {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+            })
+            const menuitems = await response.json()
+            setItems(menuitems)
+        }
+        menuitems();
+    }, [])
+
     return (
         <section>
             <div className="absolute left-0 right-0 h-auto w-full">
@@ -19,16 +36,9 @@ export default function Homemenu() {
             heading={'Menu'}
             />
             <div className="relative grid grid-cols-4 gap-5">
-                <Menuitem/>
-                <Menuitem/>
-                <Menuitem/>
-                <Menuitem/>
-                <Menuitem/>
-                <Menuitem/>
-                <Menuitem/>
-                <Menuitem/>
-                <Menuitem/>
-                <Menuitem/>
+                {items.map(item=>(
+                <Menuitem item={item}/>
+            ))}
             </div>
 
             <Heading 

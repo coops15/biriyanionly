@@ -3,7 +3,7 @@ import Image from "next/image"
 
 export default function AddItem({saving,biriyaniname,price,discription,success,handleSubmit,setDiscription,setBiriyaniName,setPrice,imageurl,imagename,handleFileChange,action}){
     return(
-        <form className="relative max-w-md mx-auto border" onSubmit={()=>handleSubmit(action)}>
+        <form className="relative max-w-md mx-auto border" onSubmit={handleSubmit}>
 
                     {success && (
                         <div className="flex flex-col items-center justify-center w-100">

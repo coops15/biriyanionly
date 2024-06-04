@@ -53,6 +53,7 @@ export const authOptions = {
 postelcode:user.postelcode,
 phone:user.phone,
 image:user.image,
+admin:user.admin,
             role: user.role
           }; 
 
@@ -81,6 +82,7 @@ image:user.image,
         token.postelcode=user.postelcode;
         token.phone=user.phone;
         token.image=user.image;
+        token.admin=user.admin;
         token.role = user.role; // Add more fields here
       }
       return token;
@@ -98,6 +100,7 @@ image:user.image,
         session.user.postelcode = user.postelcode;
         session.user.phone = user.phone;
         session.user.image = user.image;
+        session.user.admin=user.admin;
         session.user.role = user.role; // Add more fields here
       }
       

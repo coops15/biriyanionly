@@ -9,6 +9,7 @@ const UserSchema = new Schema({
     postelcode:{type:Number},
     phone:{type:Number},
     image:{type:String},
+    admin:{type:Boolean, default:false},
     email: {
         type: String,
         required: true,

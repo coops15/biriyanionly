@@ -32,6 +32,7 @@ export default function MenuItems() {
     const [admin, setAdmin] = useState(false)
     const [deletepermission, setDeletePermission] = useState('null')
     const [items, setItems] = useState([])
+    const [process,setProcess]=useState('end')
 
     useEffect(() => {
         if (status === 'authenticated') {
@@ -49,10 +50,11 @@ export default function MenuItems() {
             setItems(menuitems)
         }
         items();
-    }, [])
+    }, [deletepermission])
 
     async function handleFileChange(e) {
         e.preventDefault();
+        setProcess('uploading Image File... please wait')
         const file = e.target.files[0]
         setImagename(file.name)
         if (file) {
@@ -64,9 +66,15 @@ export default function MenuItems() {
                 const url = await getDownloadURL(fileRef);
                 setImageUrl(url)
                 console.log(url);
+                setProcess('File Uploaded!')
+                setTimeout(() => setProcess('end'), 3000)
+                
 
             } catch (error) {
                 console.log(error);
+                
+                setProcess('File Uploading Faild!')
+                setTimeout(() => setProcess('end'), 3000)
                 return null
             }
         }
@@ -193,6 +201,7 @@ export default function MenuItems() {
                             biriyaniname={biriyaniname}
                             discription={discription}
                             price={price}
+                            process={process}
                         />
                             // <form className="relative max-w-md mx-auto border" onSubmit={handleSubmit}>
 
@@ -254,15 +263,19 @@ export default function MenuItems() {
                                     {items.map(item => (
                                         <li className="flex flex-row gap-5 p-1" key={item._id}>
                                             <div className="bg-gray-100 p-1 justify-center items-center flex rounded-lg">
-                                                <Image src={item.image} width={60} height={60} alt={''} className="rounded-lg" />
+                                                <Image src={item.image} width={60} height={60} alt={''} className="h-14 rounded-lg" />
                                             </div>
-                                            <div className="flex gap-8 font-semibold text-sm items-center">
-                                                <span>{item.biriyaniname}</span>
-                                                <span>{item.price}</span>
+                                            
+                                            <div className="flex gap-4 font-semibold text-sm items-center">
+                                                <table>
+                                            <td className="w-28">
+                                                <span>{item.biriyaniname}</span></td>
+                                                <td className="w-20"><span>{item.price}</span></td>
+                                                </table>
                                                 <button className="outline-0" onClick={handleEdit}><Edit /></button>
                                                 <button className="outline-0" onClick={() => setDeletePermission(item._id || '')}><Delete /></button>
                                             </div>
-
+                                            
                                         </li>
                                     ))}
                                 </ol>

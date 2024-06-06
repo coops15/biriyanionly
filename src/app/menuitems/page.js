@@ -32,7 +32,8 @@ export default function MenuItems() {
     const [admin, setAdmin] = useState(false)
     const [deletepermission, setDeletePermission] = useState('null')
     const [items, setItems] = useState([])
-    const [process,setProcess]=useState('end')
+    const [process, setProcess] = useState('end')
+    const [editid,setEditid]=useState()
 
     useEffect(() => {
         if (status === 'authenticated') {
@@ -50,7 +51,7 @@ export default function MenuItems() {
             setItems(menuitems)
         }
         items();
-    }, [deletepermission])
+    }, [deletepermission,display])
 
     async function handleFileChange(e) {
         e.preventDefault();
@@ -68,11 +69,11 @@ export default function MenuItems() {
                 console.log(url);
                 setProcess('File Uploaded!')
                 setTimeout(() => setProcess('end'), 3000)
-                
+
 
             } catch (error) {
                 console.log(error);
-                
+
                 setProcess('File Uploading Faild!')
                 setTimeout(() => setProcess('end'), 3000)
                 return null
@@ -120,6 +121,46 @@ export default function MenuItems() {
             }
             setDisplay(false)
         }
+
+        if (action === 'EDIT') {
+            console.log('correct');
+            setSaving('Processing....')
+            setSuccsess(true)
+            // if (imageurl === '') {
+            //     return null
+            // }
+            try {
+                const response = await fetch('/api/menuitems', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        editid,
+                        biriyaniname,
+                        discription,
+                        price,
+                        image: imageurl,
+                    }),
+                }
+            
+            );
+            setImageUrl('')
+            setImagename('')
+                if (response.ok) {
+                    console.log('Item updated successfully');
+                    setSaving('Saved successful!')
+                    setTimeout(() => setSuccsess(false), 3000)
+                } else {
+                    console.log('Faild');
+                    setSaving('Faild to save!')
+                    setTimeout(() => setSuccsess(false), 3000)
+                }
+            } catch (error) {
+                console.log(error);
+            }
+            setDisplay(false)
+        }
     }
 
     function handleView(e) {
@@ -131,14 +172,18 @@ export default function MenuItems() {
         setPrice('')
     }
 
-    function handleEdit(e) {
-        e.preventDefault()
-        setAction('EDIT')
-        setBiriyaniName('Test')
-        setDiscription('Test')
-        setPrice('Test')
-        setDisplay(true)
-
+    function handleEdit(id) {
+        const item = items.find(item => item._id === id);
+        
+        if (item) {
+            setAction('EDIT');
+            setBiriyaniName(item.biriyaniname);
+            setDiscription(item.discription);
+            setPrice(item.price);
+            setImageUrl(item.image);
+            setEditid(item._id);
+            setDisplay(true);
+        }
     }
 
     async function handleDelete(e) {
@@ -156,14 +201,14 @@ export default function MenuItems() {
             })
             if (res.ok) {
                 console.log(res.json());
-                console.log('deleted',deletepermission);
+                console.log('deleted', deletepermission);
                 setDeletePermission('null')
             };
         } catch {
             console.log(error);
         }
     }
-    
+
     return (
         <>
             {admin &&
@@ -265,17 +310,17 @@ export default function MenuItems() {
                                             <div className="bg-gray-100 p-1 justify-center items-center flex rounded-lg">
                                                 <Image src={item.image} width={60} height={60} alt={''} className="h-14 rounded-lg" />
                                             </div>
-                                            
+
                                             <div className="flex gap-4 font-semibold text-sm items-center">
                                                 <table>
-                                            <td className="w-28">
-                                                <span>{item.biriyaniname}</span></td>
-                                                <td className="w-20"><span>{item.price}</span></td>
+                                                    <td className="w-28">
+                                                        <span>{item.biriyaniname}</span></td>
+                                                    <td className="w-20"><span>{item.price}</span></td>
                                                 </table>
-                                                <button className="outline-0" onClick={handleEdit}><Edit /></button>
+                                                <button className="outline-0" onClick={()=>handleEdit(item._id)}><Edit /></button>
                                                 <button className="outline-0" onClick={() => setDeletePermission(item._id || '')}><Delete /></button>
                                             </div>
-                                            
+
                                         </li>
                                     ))}
                                 </ol>

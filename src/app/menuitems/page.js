@@ -106,6 +106,8 @@ export default function MenuItems() {
                         image: imageurl,
                     }),
                 });
+                setImageUrl('')
+            setImagename('avathar')
 
                 if (response.ok) {
                     console.log('Item created successfully');
@@ -146,7 +148,7 @@ export default function MenuItems() {
             
             );
             setImageUrl('')
-            setImagename('')
+            setImagename('avathar')
                 if (response.ok) {
                     console.log('Item updated successfully');
                     setSaving('Saved successful!')
@@ -288,7 +290,7 @@ export default function MenuItems() {
 
 
                         {!display &&
-                            <div className="w-96">
+                            <div className="w-96 h-96 overflow-scroll">
                                 <span className="font-semibold text-sm text-gray-700">menuitems</span>
                                 <ol className="flex flex-col border relative">
                                     {(deletepermission != 'null') && <div className="bg-white  border rounded-lg shadow-md shadow-gray-500 h-24 w-60 absolute left-20 top-1 p-6 flex flex-col gap-2 justify-center">
@@ -315,7 +317,7 @@ export default function MenuItems() {
                                                 <table>
                                                     <td className="w-28">
                                                         <span>{item.biriyaniname}</span></td>
-                                                    <td className="w-20"><span>{item.price}</span></td>
+                                                    <td className="w-20"><span>{item.price} LKR</span></td>
                                                 </table>
                                                 <button className="outline-0" onClick={()=>handleEdit(item._id)}><Edit /></button>
                                                 <button className="outline-0" onClick={() => setDeletePermission(item._id || '')}><Delete /></button>

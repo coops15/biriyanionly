@@ -14,8 +14,8 @@ export default function AddItem({ process, saving, biriyaniname, price, discript
                 </div>)}
             <div className="flex gap-2 p-4 relative">
                 {process != 'end' &&
-                    <div className="flex items-center justify-center text-xl font-semibold text-white bg-transparent h-72 w-96 top-1 left-8 absolute rounded-lg">
-                        <span className="bg-lime-500 p-4 w-full flex items-center justify-center rounded-lg border z-10">{process}</span>
+                    <div className="flex items-center justify-center text-sm font-semibold text-white bg-transparent h-72 w-96 top-1 left-8 absolute rounded-lg">
+                        <span className="bg-lime-500 p-3 w-full flex items-center justify-center rounded-lg border z-10">{process}</span>
                     </div>
                 }
                 <div className="items-center flex flex-col mt-4">

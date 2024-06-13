@@ -44,18 +44,19 @@ export const authOptions = {
 
           console.log('User authenticated:', email);
           // Add more user details here if needed
-          return { 
-            id: user._id, 
+          return {
+            id: user._id,
             email: user.email,
             name: user.name,
-            address:user.address,
-            country:user.country,
-postelcode:user.postelcode,
-phone:user.phone,
-image:user.image,
-admin:user.admin,
+            address: user.address,
+            country: user.country,
+            postelcode: user.postelcode,
+            phone: user.phone,
+            image: user.image,
+            admin: user.admin,
+            carditems:user.carditems,
             role: user.role
-          }; 
+          };
 
         } catch (error) {
           console.error('Error in authorize function:', error);
@@ -77,12 +78,13 @@ admin:user.admin,
         token.id = user.id;
         token.email = user.email;
         token.name = user.name;
-        token.address=user.address;
-        token.country=user.country;
-        token.postelcode=user.postelcode;
-        token.phone=user.phone;
-        token.image=user.image;
-        token.admin=user.admin;
+        token.address = user.address;
+        token.country = user.country;
+        token.postelcode = user.postelcode;
+        token.phone = user.phone;
+        token.image = user.image;
+        token.admin = user.admin;
+        token.carditems=user.carditems;
         token.role = user.role; // Add more fields here
       }
       return token;
@@ -90,7 +92,7 @@ admin:user.admin,
     async session({ session, token }) {
       await mongoose.connect(process.env.MONGO_URL); // Ensure the database connection is established
       const user = await User.findById(token.id); // Fetch the latest user details from the database
-      
+
       if (user) {
         session.user.id = user._id;
         session.user.email = user.email;
@@ -100,10 +102,11 @@ admin:user.admin,
         session.user.postelcode = user.postelcode;
         session.user.phone = user.phone;
         session.user.image = user.image;
-        session.user.admin=user.admin;
+        session.user.admin = user.admin;
+        session.user.carditems=user.carditems;
         session.user.role = user.role; // Add more fields here
       }
-      
+
       return session;
     }
   },

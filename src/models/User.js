@@ -10,6 +10,7 @@ const UserSchema = new Schema({
     phone:{type:Number},
     image:{type:String},
     admin:{type:Boolean, default:false},
+    carditems:{type:[String],default:[]},
     email: {
         type: String,
         required: true,

@@ -31,6 +31,20 @@ export async function PUT(req) {
     if ('phone' in data) {
         const response = await User.updateOne({ email }, { phone: data.phone })
     }
+    if ('carditem' in data) {
+        const response = await User.updateOne({ email }, {$push: {carditems: data.carditem }})
+    }
+    return Response.json(true)
+}
+
+export async function DELETE(req) {
+    await mongoose.connect(process.env.MONGO_URL);
+    const data = await req.json();
+    const session = await getServerSession(authOptions);
+    const email = session.user.email;
+    if ('carditem' in data) {
+        const response = await User.updateOne({ email }, {$pull: {carditems: data.carditem }})
+    }
     return Response.json(true)
 }
 

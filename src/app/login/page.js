@@ -48,7 +48,7 @@ export default function Loginpage() {
         )}
         {userCreating && (
           <div className="flex text-black text-center text-sm">
-            Creating...
+            Connecting...
           </div>
         )}
         <input type="email" name="email" placeholder="Email" disabled={userDisplay} value={email} onChange={e => setEmail(e.target.value)} />

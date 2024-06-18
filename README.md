@@ -42,7 +42,7 @@ Tailwind CSS: A utility-first CSS framework for styling.
 Google Authentication: Secure login/logout with Google accounts.
 ![Screenshot (5)](https://github.com/coops15/biriyanionly/assets/137200668/f5a12d22-3981-475b-9291-c01ecd18d236)
 
-Installation:
+<h4>Installation:</h4>
 
 ```bash
 git clone https://github.com/your-username/biriyanionly.git
